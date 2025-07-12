@@ -60,7 +60,7 @@ Let's update the homepage so that it shows a list of blog posts:
   - `slug`, matching the filename (eg. `javascript-modulo-operator`)
   - `title`, `abstract`, and `publishedOn`, all passed along from the frontmatter for each post.
 
-**Note:** To help with some of the Node file-manipulation stuff, a helper module has been provided, `/src/helpers/file-helpers.js`. You can use the `getBlogPostList` function to gather the full list of blog posts. Alternatively, if you some experience using Node, feel free to solve this exercise without using this helper.
+**Note:** To help with some of the Node file-manipulation stuff, a helper module has been provided, `/src/helpers/file-helpers.ts`. You can use the `getBlogPostList` function to gather the full list of blog posts. Alternatively, if you some experience using Node, feel free to solve this exercise without using this helper.
 
 ---
 
@@ -82,7 +82,7 @@ The final result should look like this:
 
 ![Screenshot showing the blog post layout with all of the content from the MDX file, with correct formatting (paragraphs, headings, etc)](/docs/blog-post-with-mdx.png)
 
-**Note:** Inside `/src/helpers/file-helpers.js`, you'll find a function called `loadBlogPost`. You can use this helper function if you're not comfortable with the Node `fs` module.
+**Note:** Inside `/src/helpers/file-helpers.ts`, you'll find a function called `loadBlogPost`. You can use this helper function if you're not comfortable with the Node `fs` module.
 
 **Resources:**
 
@@ -123,7 +123,7 @@ And on the blog post page, it should look something like this:
 
 - The homepage and blog post pages should include the metadata specified above.
   - For the blog post page, the metadata should match the particular blog post. The `<title>` should include the blog post's `title`, and the `<meta name="description">` should use the `abstract`.
-- The name of the blog, “Bits & Bytes”, shouldn't be hardcoded. It should use the `BLOG_TITLE` constant found in `/src/constants.js`.
+- The name of the blog, “Bits & Bytes”, shouldn't be hardcoded. It should use the `BLOG_TITLE` constant found in `/src/constants.ts`.
 - Performance should be optimized, as necessary, using the React Cache API.
 
 **Resources:**
@@ -288,7 +288,7 @@ Inside the site header, we have a little sun icon. As of right now, it doesn't d
 
 ![Toggling between light mode and dark mode](/docs/dark-mode-toggle.gif)
 
-Inside the root layout (`/src/app/layout.js`), you'll see that the theme is currently being hardcoded as `'light'`. If you manually change this value to `'dark'`, the site will flip to the dark mode color theme. Your mission is to expand this implementation so that it can be toggled by the user, with their preference being persisted.
+Inside the root layout (`/src/app/layout.tsx`), you'll see that the theme is currently being hardcoded as `'light'`. If you manually change this value to `'dark'`, the site will flip to the dark mode color theme. Your mission is to expand this implementation so that it can be toggled by the user, with their preference being persisted.
 
 **Acceptance Criteria:**
 
@@ -368,7 +368,7 @@ Your mission in this exercise is to instead render a “404 not found” page:
 **Acceptance Criteria:**
 
 - Visiting an invalid URL should show the user a 404-style error.
-- It isn't sufficient to render an `<h1>404 Not Found</h1>` within the `page.js` component. We want to render an _actual_ 404 page, with a 404 status code and the correct meta tags. This is important for SEO.
+- It isn't sufficient to render an `<h1>404 Not Found</h1>` within the `page.tsx` component. We want to render an _actual_ 404 page, with a 404 status code and the correct meta tags. This is important for SEO.
 
 **Gotchas:**
 
