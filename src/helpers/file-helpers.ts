@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
+import {cache} from "react";
 
 export interface IPost {
   slug: string;
@@ -36,7 +37,7 @@ export async function getBlogPostList() {
     );
 }
 
-export async function loadBlogPost(slug: string) {
+export const loadBlogPost = cache(async (slug: string)=> {
     const rawContent = await readFile(
         `/content/${slug}.mdx`
     );
@@ -48,7 +49,7 @@ export async function loadBlogPost(slug: string) {
         ...(frontmatter as IPost),
         content,
     } as IPostWithContent;
-}
+});
 
 function readFile(localPath: string) {
     return fs.readFile(

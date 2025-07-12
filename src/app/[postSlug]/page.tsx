@@ -5,8 +5,26 @@ import BlogHero from '@/components/BlogHero';
 import styles from './postSlug.module.css';
 import {loadBlogPost} from "@/helpers/file-helpers";
 import {MDXRemote} from "next-mdx-remote/rsc";
+import {Metadata} from "next";
 
-async function BlogPost({ params }: {params: Promise<{ postSlug: string }>}) {
+interface BlogPageProps {
+    params: Promise<{ postSlug: string }>
+}
+
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+    const { postSlug } = await params;
+
+    const  {title, abstract, publishedOn } = await loadBlogPost(postSlug);
+
+    return {
+        title: title,
+        description: abstract,
+        publishedOn: publishedOn,
+        slug: postSlug,
+    } as Metadata;
+}
+
+async function BlogPost({ params }: BlogPageProps) {
     const { postSlug } = await params;
     const  {title, publishedOn, content} = await loadBlogPost(postSlug);
 

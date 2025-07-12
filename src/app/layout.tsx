@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Work_Sans,
   Spline_Sans_Mono,
