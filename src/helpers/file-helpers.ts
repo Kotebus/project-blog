@@ -9,6 +9,10 @@ export interface IPost {
   publishedOn: Date;
 }
 
+export interface IPostWithContent extends IPost {
+    content: string;
+}
+
 export async function getBlogPostList() {
     const fileNames = await readDirectory('/content');
 
@@ -40,7 +44,10 @@ export async function loadBlogPost(slug: string) {
     const {data: frontmatter, content} =
         matter(rawContent);
 
-    return {frontmatter, content};
+    return {
+        ...(frontmatter as IPost),
+        content,
+    } as IPostWithContent;
 }
 
 function readFile(localPath: string) {

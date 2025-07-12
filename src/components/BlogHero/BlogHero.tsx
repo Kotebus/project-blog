@@ -6,7 +6,7 @@ import styles from './BlogHero.module.css';
 
 interface BlogHeroProps extends ComponentProps<'header'> {
   title: string;
-  publishedOn: Date;
+  publishedOn: Date | string;
   className?: string;
 }
 function BlogHero({
@@ -29,7 +29,7 @@ function BlogHero({
         <h1>{title}</h1>
         <p>
           Published on{' '}
-          <time dateTime={publishedOn.toDateString()}>
+          <time dateTime={typeof publishedOn === 'string' ? publishedOn : publishedOn.toDateString()}>
             {humanizedDate}
           </time>
         </p>
