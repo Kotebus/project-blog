@@ -5,13 +5,14 @@ import { format } from 'date-fns';
 import Card from '@/components/Card';
 
 import styles from './BlogSummaryCard.module.css';
+import {IPost} from "@/helpers/file-helpers";
 
 function BlogSummaryCard({
   slug,
   title,
   publishedOn,
   abstract,
-}) {
+}: IPost) {
   const href = `/${slug}`;
   const humanizedDate = format(
     new Date(publishedOn),

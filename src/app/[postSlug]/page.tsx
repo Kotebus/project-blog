@@ -6,6 +6,7 @@ import styles from './postSlug.module.css';
 import {loadBlogPost} from "@/helpers/file-helpers";
 import {MDXRemote} from "next-mdx-remote/rsc";
 import {Metadata} from "next";
+import CodeSnippet from "@/components/CodeSnippet";
 
 interface BlogPageProps {
     params: Promise<{ postSlug: string }>
@@ -35,7 +36,12 @@ async function BlogPost({ params }: BlogPageProps) {
                 publishedOn={publishedOn}
             />
             <div className={styles.page}>
-                <MDXRemote source={content} />
+                <MDXRemote
+                    source={content}
+                    components={{
+                        CodeSnippet
+                    }}
+                />
             </div>
         </article>
     );

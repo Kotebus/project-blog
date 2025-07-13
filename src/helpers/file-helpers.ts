@@ -7,7 +7,7 @@ export interface IPost {
   slug: string;
   abstract: string;
   title: string;
-  publishedOn: Date;
+  publishedOn: string;
 }
 
 export interface IPostWithContent extends IPost {
