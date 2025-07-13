@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import clsx from 'clsx';
+import {LayoutGroup, motion } from 'motion/react';
 
 import { range } from '@/utils';
 import Card from '@/components/Card';
@@ -15,11 +16,55 @@ interface DivisionGroupsDemoProps {
     includeRemainderArea: boolean;
 }
 
+type Id = string;
+
+interface GridProps {
+    items: Id[];
+    numOfGroups: number;
+    numOfItemsPerGroup: number;
+}
+
+function Grid({items, numOfGroups, numOfItemsPerGroup}: GridProps) {
+    let internalIndex = 0;
+
+    const motionDivsArray = range(numOfGroups).map((groupIndex) => (
+        <div key={groupIndex} className={styles.group}>
+            {range(numOfItemsPerGroup).map(() => {
+                const id = items[internalIndex];
+                console.log(internalIndex);
+                internalIndex++;
+                return (
+                    <motion.div
+                        transition={{
+                            type: 'spring',
+                            stiffness: 350 - (internalIndex - 1) * 15,
+                            damping: 30,
+                        }}
+                        layoutId={id}
+                        key={id}
+                        className={styles.item}
+                    >
+                        {id}
+                    </motion.div>
+                );
+            })}
+        </div>
+    ));
+    return <LayoutGroup>{motionDivsArray}</LayoutGroup>;
+}
+
 function DivisionGroupsDemo({
   numOfItems = 12,
   initialNumOfGroups = 1,
   includeRemainderArea,
 }: DivisionGroupsDemoProps) {
+
+    const [items] = React.useState(
+        () => range(numOfItems).map(
+            () => crypto.randomUUID() as Id
+        )
+    );
+
     const [numOfGroups, setNumOfGroups] = React.useState(
         initialNumOfGroups
     );
@@ -65,18 +110,11 @@ function DivisionGroupsDemo({
                     className={clsx(styles.demoArea)}
                     style={gridStructure}
                 >
-                    {range(numOfGroups).map((groupIndex) => (
-                        <div key={groupIndex} className={styles.group}>
-                            {range(numOfItemsPerGroup).map((index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        className={styles.item}
-                                    />
-                                );
-                            })}
-                        </div>
-                    ))}
+                    <Grid
+                        items={items}
+                        numOfGroups={numOfGroups}
+                        numOfItemsPerGroup={numOfItemsPerGroup}
+                    />
                 </div>
             </div>
 
