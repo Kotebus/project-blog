@@ -6,16 +6,33 @@ import styles from './postSlug.module.css';
 import {loadBlogPost} from "@/helpers/file-helpers";
 import {MDXRemote} from "next-mdx-remote/rsc";
 import {Metadata} from "next";
-import CodeSnippet from "@/components/CodeSnippet";
+import dynamic from "next/dynamic";
+import Spinner from "@/components/Spinner";
+
+const loadingFunction = () => <Spinner/>;
+
+const CodeSnippet = dynamic(
+    () => import("@/components/CodeSnippet"),
+    {loading: loadingFunction}
+);
+const DivisionGroupsDemo = dynamic(
+    () => import("@/components/DivisionGroupsDemo"),
+    {loading: loadingFunction}
+);
+
+const CircularColorsDemo = dynamic(
+    () => import("@/components/CircularColorsDemo"),
+    {loading: loadingFunction}
+);
 
 interface BlogPageProps {
     params: Promise<{ postSlug: string }>
 }
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
-    const { postSlug } = await params;
+export async function generateMetadata({params}: BlogPageProps): Promise<Metadata> {
+    const {postSlug} = await params;
 
-    const  {title, abstract, publishedOn } = await loadBlogPost(postSlug);
+    const {title, abstract, publishedOn} = await loadBlogPost(postSlug);
 
     return {
         title: title,
@@ -25,9 +42,9 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     } as Metadata;
 }
 
-async function BlogPost({ params }: BlogPageProps) {
-    const { postSlug } = await params;
-    const  {title, publishedOn, content} = await loadBlogPost(postSlug);
+async function BlogPost({params}: BlogPageProps) {
+    const {postSlug} = await params;
+    const {title, publishedOn, content} = await loadBlogPost(postSlug);
 
     return (
         <article className={styles.wrapper}>
@@ -39,7 +56,9 @@ async function BlogPost({ params }: BlogPageProps) {
                 <MDXRemote
                     source={content}
                     components={{
-                        CodeSnippet
+                        CodeSnippet,
+                        CircularColorsDemo,
+                        DivisionGroupsDemo,
                     }}
                 />
             </div>

@@ -180,7 +180,7 @@ Inside the `javascript-modulo-operator.mdx` file, you'll notice that some code h
 
 If you uncomment this code, you'll get an error telling you that next-mdx-remote doesn't know how to resolve the `DivisionGroupsDemo`.
 
-This component exists, and you can find it in `/src/components/DivisionGroupsDemo/DivisionGroupsDemo.js`. Your mission in the first part of this exercise is to resolve this component, fixing the issue and getting it rendering, like so:
+This component exists, and you can find it in `/src/components/DivisionGroupsDemo/DivisionGroupsDemo.tsx`. Your mission in the first part of this exercise is to resolve this component, fixing the issue and getting it rendering, like so:
 
 ![Screen recording showing the embedded `DivisionGroupsDemo` component](/docs/division-groups-demo.png)
 

@@ -7,7 +7,6 @@ import styles from './BlogHero.module.css';
 interface BlogHeroProps extends ComponentProps<'header'> {
   title: string;
   publishedOn: string;
-  className?: string;
 }
 function BlogHero({
   title,
@@ -22,8 +21,8 @@ function BlogHero({
 
   return (
     <header
-      className={clsx(styles.wrapper, className)}
-      {...delegated}
+        {...delegated}
+        className={clsx(styles.wrapper, className)}
     >
       <div className={styles.content}>
         <h1>{title}</h1>
