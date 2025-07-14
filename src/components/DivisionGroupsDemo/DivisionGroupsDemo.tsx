@@ -10,6 +10,7 @@ import SliderControl from '@/components/SliderControl';
 import Equation from './Equation';
 import styles from './DivisionGroupsDemo.module.css';
 import useNextMotionItem from '@/hooks/use-next-motion-item';
+import MotionItem from "@/components/DivisionGroupsDemo/MotionItem";
 
 interface DivisionGroupsDemoProps {
     numOfItems?: number;
@@ -22,7 +23,7 @@ function DivisionGroupsDemo({
   initialNumOfGroups = 1,
   includeRemainderArea,
 }: DivisionGroupsDemoProps) {
-    const getNextMotionItem = useNextMotionItem({numOfItems});
+    const getNextMotionItem = useNextMotionItem({numOfItems, as: MotionItem});
 
     const [numOfGroups, setNumOfGroups] = React.useState(
         initialNumOfGroups

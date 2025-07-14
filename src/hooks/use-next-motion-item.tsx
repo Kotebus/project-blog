@@ -1,15 +1,20 @@
-import React, {useCallback} from "react";
+import React, {ComponentType, useCallback} from "react";
 import {range} from "@/utils";
-import MotionItem from '@/components/DivisionGroupsDemo/MotionItem';
+import {MotionProps} from "motion/react";
 
-function useNextMotionItem({numOfItems}: {numOfItems: number}) {
+interface MotionItemProps {
+    numOfItems: number;
+    as: ComponentType<MotionProps>;
+}
+
+function useNextMotionItem({numOfItems, as: MotionComponent}: MotionItemProps) {
     const indexRef = React.useRef(0);
 
     const [items] = React.useState(
         () => range(numOfItems).map(
             () => {
                 const key = 'id-' + crypto.randomUUID();
-                return (<MotionItem key={key} layoutId={key}/>);
+                return (<MotionComponent key={key} layoutId={key}/>);
             }
         )
     );
