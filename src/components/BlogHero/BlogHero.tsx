@@ -4,9 +4,16 @@ import clsx from 'clsx';
 
 import styles from './BlogHero.module.css';
 
+
+const getHumanizedDate = (date: string) =>
+    format(
+        new Date(date),
+        'MMMM do, yyyy'
+    );
+
 interface BlogHeroProps extends ComponentProps<'header'> {
   title: string;
-  publishedOn: string;
+  publishedOn?: string;
 }
 function BlogHero({
   title,
@@ -14,26 +21,23 @@ function BlogHero({
   className,
   ...delegated
 }: BlogHeroProps) {
-  const humanizedDate = format(
-    new Date(publishedOn),
-    'MMMM do, yyyy'
-  );
-
   return (
-    <header
-        {...delegated}
-        className={clsx(styles.wrapper, className)}
-    >
-      <div className={styles.content}>
-        <h1>{title}</h1>
-        <p>
-          Published on{' '}
-          <time dateTime={publishedOn}>
-            {humanizedDate}
-          </time>
-        </p>
-      </div>
-    </header>
+      <header
+          {...delegated}
+          className={clsx(styles.wrapper, className)}
+      >
+        <div className={styles.content}>
+          <h1>{title}</h1>
+          {publishedOn && (
+              <p>
+                Published on{' '}
+                <time dateTime={publishedOn}>
+                  {getHumanizedDate(publishedOn)}
+                </time>
+              </p>
+          )}
+        </div>
+      </header>
   );
 }
 

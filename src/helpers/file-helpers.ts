@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import {cache} from "react";
+import {notFound} from "next/navigation";
 
 export interface IPost {
   slug: string;
@@ -38,17 +39,21 @@ export async function getBlogPostList() {
 }
 
 export const loadBlogPost = cache(async (slug: string)=> {
-    const rawContent = await readFile(
-        `/content/${slug}.mdx`
-    );
+    try {
+        const rawContent = await readFile(
+            `/content/${slug}.mdx`
+        );
 
-    const {data: frontmatter, content} =
-        matter(rawContent);
+        const {data: frontmatter, content} =
+            matter(rawContent);
 
-    return {
-        ...(frontmatter as IPost),
-        content,
-    } as IPostWithContent;
+        return {
+            ...(frontmatter as IPost),
+            content,
+        } as IPostWithContent;
+    } catch {
+        notFound();
+    }
 });
 
 function readFile(localPath: string) {
