@@ -5,7 +5,6 @@ import {getBlogPostList} from "@/helpers/file-helpers";
 async function BlogPostList() {
     const posts = await getBlogPostList();
 
-    console.log({posts});
     return (
         <>
             {posts.map(({slug, title, abstract, publishedOn}) => (

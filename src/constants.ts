@@ -1,7 +1,5 @@
-import {CSSProperties} from "react";
-
 export const BLOG_TITLE = 'Bits & Bytes';
-
+export const SITE_URL = 'http://localhost:3000/';
 export const THEME_COOKIE_NAME = 'color-theme';
 
 export const LIGHT_COLORS = {
@@ -29,7 +27,7 @@ export const LIGHT_COLORS = {
   '--color-gray-700': 'hsl(50deg 10% 25%)',
   '--color-gray-900': 'hsl(50deg 20% 10%)',
   '--color-gray-1000': 'black',
-} as CSSProperties;
+};
 
 export const DARK_COLORS = {
   '--color-text': 'hsl(0deg 0% 100%)',
@@ -56,7 +54,7 @@ export const DARK_COLORS = {
   '--color-gray-700': 'hsl(256deg 10% 75%)',
   '--color-gray-900': 'hsl(256deg 20% 90%)',
   '--color-gray-1000': 'white',
-} as CSSProperties;
+};
 
 // Add in semantic / special colors
 LIGHT_COLORS['--color-primary'] =

@@ -1,4 +1,4 @@
-import {PropsWithChildren} from "react";
+import {CSSProperties, PropsWithChildren} from "react";
 import {
   Work_Sans,
   Spline_Sans_Mono,
@@ -39,7 +39,7 @@ async function RootLayout({ children }: PropsWithChildren) {
             lang="en"
             className={clsx(mainFont.variable, monoFont.variable)}
             data-color-theme={theme}
-            style={themeStyles}
+            style={themeStyles as CSSProperties}
         >
         <body>
         <Header theme={theme}/>
