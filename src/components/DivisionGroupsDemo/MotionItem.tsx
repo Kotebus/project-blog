@@ -1,4 +1,4 @@
-import {Id} from "@/Types/IdType";
+import {Id} from "@/Types/types";
 import {motion} from "motion/react";
 import styles from "@/components/DivisionGroupsDemo/DivisionGroupsDemo.module.css";
 import React from "react";

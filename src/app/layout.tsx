@@ -1,15 +1,18 @@
+import {PropsWithChildren} from "react";
 import {
   Work_Sans,
   Spline_Sans_Mono,
 } from 'next/font/google';
+
 import clsx from 'clsx';
 
-import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
-
+import {LIGHT_TOKENS, DARK_TOKENS, THEME_COOKIE_NAME} from '@/constants';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import './styles.css';
 import RespectMotionPreferences from "@/components/RespectMotionPreferences/RespectMotionPreferences";
+import { cookies } from "next/headers";
+import {Theme} from "@/Types/types";
 
 const mainFont = Work_Sans({
   subsets: ['latin'],
@@ -24,17 +27,19 @@ const monoFont = Spline_Sans_Mono({
   variable: '--font-family-mono',
 });
 
-function RootLayout({ children }) {
-  // TODO: Dynamic theme depending on user preference
-  const theme = 'light';
+async function RootLayout({ children }: PropsWithChildren) {
+    const savedTheme = (await cookies()).get(THEME_COOKIE_NAME);
+    const theme = (savedTheme?.value || 'light') as Theme;
+    const themeStyles =
+        theme === 'light' ? LIGHT_TOKENS : DARK_TOKENS;
 
-  return (
+    return (
       <RespectMotionPreferences>
         <html
             lang="en"
             className={clsx(mainFont.variable, monoFont.variable)}
             data-color-theme={theme}
-            style={theme === 'light' ? LIGHT_TOKENS : DARK_TOKENS}
+            style={themeStyles}
         >
         <body>
         <Header theme={theme}/>
