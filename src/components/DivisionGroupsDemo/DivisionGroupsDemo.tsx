@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import clsx from 'clsx';
-import {LayoutGroup, motion} from 'motion/react';
+import {LayoutGroup} from 'motion/react';
 
 import {range} from '@/utils';
 import Card from '@/components/Card';
@@ -9,6 +9,7 @@ import SliderControl from '@/components/SliderControl';
 
 import Equation from './Equation';
 import styles from './DivisionGroupsDemo.module.css';
+import useNextMotionItem from '@/hooks/use-next-motion-item';
 
 interface DivisionGroupsDemoProps {
     numOfItems?: number;
@@ -16,48 +17,16 @@ interface DivisionGroupsDemoProps {
     includeRemainderArea: boolean;
 }
 
-type Id = string;
-
-function MotionItem({layoutId, internalIndex = 1} :  {layoutId: Id, internalIndex?: number}) {
-    return (
-        <motion.div
-            transition={{
-                type: 'spring',
-                stiffness: 350 - (internalIndex - 1) * 15,
-                damping: 30,
-            }}
-            layoutId={layoutId}
-            className={styles.item}
-        />
-    );
-}
-
 function DivisionGroupsDemo({
   numOfItems = 12,
   initialNumOfGroups = 1,
   includeRemainderArea,
 }: DivisionGroupsDemoProps) {
-
-    const [items] = React.useState(
-        () => range(numOfItems).map(
-            () => {
-                const key = 'id' + crypto.randomUUID();
-                return (<MotionItem key={key} layoutId={key}/>);
-            }
-        )
-    );
+    const getNextMotionItem = useNextMotionItem({numOfItems});
 
     const [numOfGroups, setNumOfGroups] = React.useState(
         initialNumOfGroups
     );
-
-    const indexRef = React.useRef(0);
-
-    const getNextMotionItem = () => {
-        const motionItem = items[indexRef.current];
-        indexRef.current = indexRef.current + 1 === items.length ? 0 : indexRef.current + 1;
-        return motionItem;
-    }
 
     const numOfItemsPerGroup = Math.floor(
         numOfItems / numOfGroups
