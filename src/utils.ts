@@ -20,3 +20,9 @@ export function range(start:number, end?:number, step = 1):number[] {
 
   return output;
 }
+
+export function takeItemFromArrayCircular(arr: Array<any>, position: number) {
+  const length = arr.length;
+  console.log(arr[(position % length + length) % length]);
+  return  arr[(position % length + length) % length];
+}

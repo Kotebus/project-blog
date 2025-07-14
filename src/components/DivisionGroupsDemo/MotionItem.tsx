@@ -3,7 +3,7 @@ import {motion} from "motion/react";
 import styles from "@/components/DivisionGroupsDemo/DivisionGroupsDemo.module.css";
 import React from "react";
 
-function MotionItem({layoutId} :  {layoutId: Id}) {
+function MotionItem({layoutId}: { layoutId: Id }) {
     return (
         <motion.div
             transition={{
